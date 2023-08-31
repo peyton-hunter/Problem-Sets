@@ -1,0 +1,41 @@
+from plates import is_valid
+
+
+def main():
+    test_char()
+    test_zero()
+    test_number_placement()
+    test_len()
+    test_first_two()
+
+
+def test_first_two():
+    assert is_valid("AB123") == True
+    assert is_valid("A1234") == False
+
+
+def test_char():
+    assert is_valid("ABC123") == True
+    assert is_valid("AB 123") == False
+    assert is_valid("HELLO!") == False
+
+
+def test_zero():
+    assert is_valid("0123AB") == False
+    assert is_valid("AB0123") == False
+    assert is_valid("AB1023") == True
+
+
+def test_number_placement():
+    assert is_valid("AB12CD") == False
+    assert is_valid("AB1234") == True
+
+
+def test_len():
+    assert is_valid("AABBCCD") == False
+    assert is_valid("AB12") == True
+    assert is_valid("A") == False
+
+
+if __name__ == "__main__":
+    main()
