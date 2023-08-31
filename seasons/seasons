@@ -1,0 +1,32 @@
+from datetime import date, timedelta
+import inflect
+import sys
+
+
+def main():
+    today = date.today()
+    birthday = input("Date of Birth (YYYY-MM-DD): ")
+    birthday = format_date(birthday)
+    days = today - birthday
+    seasons = calculation(days)
+    print(f"{seasons} minutes")
+
+
+def format_date(birthday):
+    try:
+        return date.fromisoformat(birthday)
+    except ValueError:
+        raise ValueError("Invalid date")
+        
+
+
+
+def calculation(days):
+    p = inflect.engine()
+    minutes = int((days.total_seconds() / 60))
+    seasons = p.number_to_words(minutes, andword="").capitalize()
+    return seasons
+
+
+if __name__ == "__main__":
+    main()
