@@ -1,0 +1,35 @@
+from pyfiglet import Figlet
+import sys
+import random
+
+
+def main():
+    figlet = Figlet()
+    font_list = figlet.getFonts()
+    if len(sys.argv) == 1:
+        isRandom = True
+    elif (
+        len(sys.argv) == 3
+        and (sys.argv[1] == "-f" or sys.argv[1] == "--font")
+        and (sys.argv[2] in font_list)
+    ):
+        isRandom = False
+    else:
+        sys.exit(1)
+
+    def random_font():
+        random_font = random.choice(font_list)
+        figlet.setFont(font=random_font)
+
+    def text_create():
+        if isRandom:
+            random_font()
+        else:
+            figlet.setFont(font=(sys.argv[2]))
+
+    user_text = input("Input: ")
+    text_create()
+    print(figlet.renderText(user_text))
+
+
+main()
