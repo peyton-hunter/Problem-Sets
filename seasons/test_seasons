@@ -1,0 +1,29 @@
+from seasons import format_date, calculation
+from datetime import datetime, timedelta
+import pytest
+
+
+def main():
+    test_calculation()
+    test_format_date()
+
+
+def test_format_date():
+    with pytest.raises(ValueError):
+        format_date("12/1/1990")
+    with pytest.raises(ValueError):
+        format_date("March 1, 2000")
+    with pytest.raises(ValueError):
+        format_date("1-1-1800")
+    with pytest.raises(ValueError):
+        format_date("1950/10/32")
+
+
+def test_calculation():
+    test_days = timedelta(10)
+    result = calculation(test_days)
+    assert result == "Fourteen thousand, four hundred"
+
+
+if __name__ == "__main__":
+    main()
